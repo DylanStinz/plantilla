@@ -12,15 +12,16 @@
         <h1>Mi pagina</h1>
         <nav class="nav">
             <a class="nav-link" href="/">Inicio</a>
-            <a class="nav-link" href="/about">Acerca de</a>
-            <a class="nav-link" href="/contact">Contacto</a>
+            <a class="nav-link" href="/animal">Animales</a>
+            <a class="nav-link" href="/vehiculos">vehiculos</a>
+            <a class="nav-link" href="/maravillas">las maravillas del mundo</a>
+            <a class="nav-link" href="/acerca">acerca de</a>
         </nav>
+    </header>
+    <p> esta pagina esta dedica para informar sobre diversas cosas como los animales exoticos o los vehiculos antiguos </p>
         <section>
-            (%
-            {% block blockname %}
-                
-            {% endblock blockname %}
-                %)
+            {%block contenido%}
+            {%endblock%}
            </section>
 </body>
 </html>
