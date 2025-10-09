@@ -9,5 +9,11 @@ def animal():
 @app.route("/vehiculos")
 def vehiculos():
     return render_template('carros.html')
+@app.route("/maravillas")
+def maravillas():
+    return render_template('maravillas.html')
+@app.route("/acerca")
+def contacto():
+    return render_template('acerca.html') 
 if __name__ == '__main__':
     app.run(debug=True)

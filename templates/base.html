@@ -8,19 +8,29 @@
 </head>
 <body>
     <main class="container">
-       <header>
-        <h1>Mi pagina</h1>
-        <nav class="nav">
-            <a class="nav-link" href="/">Inicio</a>
-            <a class="nav-link" href="/animal">Animales</a>
-            <a class="nav-link" href="/vehiculos">vehiculos</a>
-            <a class="nav-link" href="/maravillas">las maravillas del mundo</a>
-            <a class="nav-link" href="/acerca">acerca de</a>
+<header class="bg-light text-dark py-4 mb-4 rounded shadow-sm">
+    <div class="container text-center">
+        <h1 class="display-5 fw-bold">Desarrollo de Plantilla Base</h1>
+        <nav class="nav justify-content-center mt-3">
+            <a class="nav-link text-dark fw-semibold" href="/">Inicio</a>
+            <a class="nav-link text-dark fw-semibold" href="/animal">Animales Exóticos</a>
+            <a class="nav-link text-dark fw-semibold" href="/vehiculos">Vehículos Antiguos</a>
+            <a class="nav-link text-dark fw-semibold" href="/maravillas">Las Maravillas del Mundo</a>
+            <a class="nav-link text-dark fw-semibold" href="/acerca">Acerca de...</a>
         </nav>
-    </header>
-    <p> esta pagina esta dedica para informar sobre diversas cosas como los animales exoticos o los vehiculos antiguos </p>
+    </div>
+</header>
+    
         <section>
             {%block contenido%}
+<p>
+    Esta página está dedicada a informar sobre diversas temáticas fascinantes, incluyendo animales exóticos, vehículos antiguos y las maravillas del mundo. 
+    Nuestro objetivo es ofrecer contenido educativo y entretenido para todos aquellos interesados en la naturaleza, la historia del transporte y las grandes construcciones y paisajes del planeta. 
+    Aquí podrás explorar especies poco conocidas del reino animal, descubrir la evolución de los automóviles a través de los años, y maravillarte con los lugares más asombrosos creados por la naturaleza o el ser humano.
+</p>
+      <img src ="{{url_for('static', filename='img/m1.jpg')}}" alt="portada" class="img-fluid" width="300" height="300">  
+      <img src ="{{url_for('static', filename='img/vh1.jpg')}}" alt="portada" class="img-fluid" width="300" height="300">
+            
             {%endblock%}
            </section>
 </body>
