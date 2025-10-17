@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request , redirect ,url_for ,flash
-app.config["SECRET_KEY"]="una_clave_muy_larga_y_dificil_de_adivinar"
+
 app = Flask(__name__)
+app.config["SECRET_KEY"]="una_clave_muy_larga_y_dificil_de_adivinar"
 @app.route('/')
 def index():
     return render_template('base.html')
@@ -16,29 +17,35 @@ def maravillas():
 @app.route("/acerca")
 def contacto():
     return render_template('acerca.html') 
-@app.route("/crear")
+@app.route("/crear", methods=["GET", "POST"])
 def crear():
-    return render_template('crear.html') 
+    error = None
+    if request.method == "POST":
+        nombreCompleto = request.form.get("nombre")
+        apellido = request.form.get("apellido")
+        email = request.form.get("email")
+        password = request.form.get("password")
+        confirmPassword = request.form.get("confirmPassword")
+        fechaNacimiento = request.form.get("fechaNacimiento")
+        genero = request.form.get("genero")
+        genero_personalizado = request.form.get("genero_personalizado")
+
+        if password != confirmPassword:
+            error = "Las contraseñas no coinciden"
+        elif not nombreCompleto or not email or not password:
+            error = "Todos los campos obligatorios deben completarse."
+
+        if error:
+            flash(error)
+            return redirect(url_for("crear"))
+        else:
+            flash(f"Registro exitoso, bienvenido/a {nombreCompleto} {apellido}")
+            return redirect(url_for("index"))
+    return render_template("crear.html")
+
 @app.route("/inicio")
 def inicio():
     return render_template('inicio.html')
-@app.registra("/crear", methods=["POST", "GET"])
-def registrame():
-    error=None
-    if request.method=="POST":
-            nombreCompleto=request.form["nombre"]
-            email =request.form["email"]
-            password=request.form["password"]
-            confirmPassword=request.form["confirmPassword"]
-            fechaNacimiento=request.form["fechaNacimiento"]
-            genero=request.form["genero"]
-            if password != confirmPassword:
-                error="Las contraseñas no coinciden"
-            if error != None:
-                flash(error)
-                return redirect(url_for("crear.html"))
-            else:
-                flash(f"registro exitoso, bienvenido {nombreCompleto}")
-                return render_template("inicio.html")
+
 if __name__ == '__main__':
     app.run(debug=True)
