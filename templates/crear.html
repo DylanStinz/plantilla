@@ -9,6 +9,18 @@
       <div class="card shadow rounded-3 p-4 text-start">
         <h5 class="card-title mb-3 text-center">Crear nueva cuenta</h5>
         <p class="text-center text-muted mb-4">Es rápido y fácil.</p>
+<div class="container-mt-4">
+    {% with messages=get_flashed_messages(with_categories=true)%}
+        {% if messages %}
+            {% for category , message in messages %}
+                <div class="alert alert={{'danger' if category=='error' else 'danger'}} alert-dimsissible fade show" >
+                    {{message}}
+                    <button type "button" class="btn-close" data-bs-dismiss="alert" arial-label= "close"> </button>
+                </div>
+            {% endfor %}             
+        {% endif %}        
+    {% endwith %}            
+</div>
 
         <form method="POST" action="{{ url_for('crear') }}">
           <div class="row g-2">
