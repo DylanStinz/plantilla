@@ -36,8 +36,8 @@ def crear():
             error = "Todos los campos obligatorios deben completarse."
 
         if error:
-            flash(error)
-            return redirect(url_for("crear"))
+           flash(error, "error")
+           return render_template("crear.html")
         else:
             flash(f"Registro exitoso, bienvenido/a {nombreCompleto} {apellido}")
             return redirect(url_for("index"))
