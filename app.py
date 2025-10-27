@@ -1,7 +1,14 @@
-from flask import Flask, render_template, request , redirect ,url_for ,flash
+from flask import Flask, render_template, request , redirect ,url_for ,flash,session
 
 app = Flask(__name__)
+USUARIOS_REGISTRADOS = {
+    "hola@gmail.com":{
+        "password":"holamundo",
+        "nombre":"Juan Perez"        
+    }    
+}
 app.config["SECRET_KEY"]="una_clave_muy_larga_y_dificil_de_adivinar"
+
 @app.route('/')
 def index():
     return render_template('base.html')
@@ -43,9 +50,33 @@ def crear():
             return redirect(url_for("index"))
     return render_template("crear.html")
 
-@app.route("/inicio")
+@app.route("/login")
 def inicio():
-    return render_template('inicio.html')
+    if session.get("logueado")==True:
+        session.clear()
+        return render_template('base.html')
+    return render_template('login.html')
 
+@app.route("/validalogin", methods=["POST", "GET"])
+def validalogin():
+    if request.method=="POST":
+        email=request.form.get("email", "").strip()
+        passwor=request.form.get("password")
+    
+    if not email or not passwor:
+        flash("Debe ingresar un email y una contraseña", "error")
+    elif email in USUARIOS_REGISTRADOS:
+        usuario= USUARIOS_REGISTRADOS[email]
+        if usuario["password"]==passwor:
+            session["usuario_email"]=email
+            session["usuario_nombre"]=usuario["nombre"]
+            session["logueado"]=True
+            
+            return redirect(url_for("index"))
+        else:
+            flash("Contraseña incorrecta", "error")
+    else:
+        flash("El usuario no está registrado", "error")
+    return redirect(url_for("inicio"))
 if __name__ == '__main__':
     app.run(debug=True)

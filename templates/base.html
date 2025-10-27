@@ -11,14 +11,20 @@
 <header class="bg-light text-dark py-4 mb-4 rounded shadow-sm">
     <div class="container text-center">
         <h1 class="display-5 fw-bold">Desarrollo de Plantilla Base</h1>
-        <nav class="nav justify-content-center mt-3">
+          <nav class="nav justify-content-center mt-3">
             <a class="nav-link text-dark fw-semibold" href="/">Inicio</a>
             <a class="nav-link text-dark fw-semibold" href="/animal">Animales Exóticos</a>
             <a class="nav-link text-dark fw-semibold" href="/vehiculos">Vehículos Antiguos</a>
             <a class="nav-link text-dark fw-semibold" href="/maravillas">Las Maravillas del Mundo</a>
             <a class="nav-link text-dark fw-semibold" href="/acerca">Acerca de...</a>
-            <a class="nav-link text-dark fw-semibold" href="/crear">Registrarse</a>
-             <a class="nav-link text-dark fw-semibold" href="/inicio">inicio</a>
+
+            {% if session.get('logueado') %}
+                <a class="nav-link text-dark fw-semibold" href="{{ url_for('inicio') }}">Cerrar Sesión</a>
+                 <span class="nav-link text-dark fw-semibold">Hola {{ session.get('usuario_nombre') }}</span>
+            {% else %}
+                <a class="nav-link text-dark fw-semibold" href="{{ url_for('crear') }}">Registrarse</a>
+                <a class="nav-link text-dark fw-semibold" href="{{ url_for('inicio') }}">Iniciar sesión</a>
+            {% endif %}
         </nav>
     </div>
 </header>

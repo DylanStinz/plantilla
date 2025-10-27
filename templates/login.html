@@ -7,20 +7,20 @@
       <div class="card shadow rounded-3 p-3 text-start">
         <h5 class="card-title mb-4 text-center">Iniciar sesión</h5>
         <p class="text-center text-muted mb-3">Ingresa a tu cuenta.</p>
-        <form>
+        <form method="POST" action="/validalogin">
           <div class="mb-3">
             <label class="form-label">Correo electrónico o número de móvil:</label>
-            <input type="email" name="email" class="form-control" placeholder="Correo electrónico o número de móvil" />
+            <input type="email"  class="form-control" id="email", name="email"
+            value="{{ request.form.email if request.form}}" required 
+            />
           </div>
           <div class="mb-3">
             <label class="form-label">Contraseña:</label>
-            <input type="password" name="password" class="form-control" placeholder="Contraseña" />
+            <input type="password" name="password" class="form-control" id="password" required/>
           </div>
           <button type="submit" class="btn btn-success w-100 mt-3">Iniciar sesión</button>
         </form>
-        <p class="text-center mt-3">
-          <a href="#">¿Olvidaste tu contraseña?</a>
-        </p>
+        
       </div>
     </div>
     <div class="col"></div>
